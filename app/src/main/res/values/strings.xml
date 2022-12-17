@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Advent of fap</string>
+    <string name="action_settings">Настройки</string>
+    <string name="tutorial_label">Туториал</string>
+    <string name="database_label">База данных</string>
+    <string name="next">Лучше бы деньги</string>
+    <string name="previous">Назад</string>
+
+    <string name="tutorial_contents">
+        Это приложение - твой клиент по отслеживанию дрочки.
+        Каждый раз, как ты стремишься к своему новому рекорду,
+        ты можешь нажать кнопку в нижнем правом углу и занести
+        результаты упражнения.
+    </string>
+    <string name="newyear_message">
+        С наступающим, Влад! В новом году желаю тебе успехов
+        в твоих начинаниях. Это приложение создано для того,
+        чтобы помочь достичь новых вершин в 2023 году!
+    </string>
+    <string name="button_description">Add button</string>
+</resources>

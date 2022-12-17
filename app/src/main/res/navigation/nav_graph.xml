@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/Tutorial">
+
+    <fragment
+        android:id="@+id/Tutorial"
+        android:name="com.example.advent_of_fap.Tutorial"
+        android:label="@string/tutorial_label"
+        tools:layout="@layout/tutorial">
+
+        <action
+            android:id="@+id/action_Tutorial_to_Database"
+            app:destination="@id/Database" />
+    </fragment>
+    <fragment
+        android:id="@+id/Database"
+        android:name="com.example.advent_of_fap.Database"
+        android:label="@string/database_label"
+        tools:layout="@layout/database">
+
+        <action
+            android:id="@+id/action_Database_to_Tutorial"
+            app:destination="@id/Tutorial" />
+    </fragment>
+</navigation>
