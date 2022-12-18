@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/Tutorial"
-        android:name="com.example.advent_of_fap.Tutorial"
+        android:name="com.example.Tutorial"
         android:label="@string/tutorial_label"
         tools:layout="@layout/tutorial">
 
@@ -17,12 +17,22 @@
     </fragment>
     <fragment
         android:id="@+id/Database"
-        android:name="com.example.advent_of_fap.Database"
+        android:name="com.example.Database"
         android:label="@string/database_label"
         tools:layout="@layout/database">
 
         <action
             android:id="@+id/action_Database_to_Tutorial"
             app:destination="@id/Tutorial" />
+        <action
+            android:id="@+id/action_Database_to_No_Records"
+            app:destination="@+id/No_Records" />
+    </fragment>
+    <fragment
+        android:id="@+id/No_Records"
+        android:name="com.example.Database"
+        android:label="@string/no_records_label"
+        tools:layout="@layout/no_records">
+
     </fragment>
 </navigation>

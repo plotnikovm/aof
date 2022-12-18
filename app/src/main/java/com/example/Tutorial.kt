@@ -1,11 +1,12 @@
-package com.example.advent_of_fap
+package com.example
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.advent_of_fap.R
 import com.example.advent_of_fap.databinding.TutorialBinding
 
 /**
@@ -20,8 +21,8 @@ class Tutorial : Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
 
         _binding = TutorialBinding.inflate(inflater, container, false)
