@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import io.aof.advent_of_fap.databinding.TutorialBinding
-import io.aof.db.Db.FapReaderContract.FapEntry
-import io.aof.db.Db.FapReaderContract.FapReaderDbHelper
+import io.aof.db.Db.Fap.FapEntry
+import io.aof.db.Db.Fap.FapReaderDbHelper
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.

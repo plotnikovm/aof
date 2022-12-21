@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Advent of fap</string>
     <string name="action_settings">Настройки</string>
-    <string name="tutorial_label">Туториал</string>
+    <string name="tutorial_label">Advent Of Fap</string>
     <string name="database_label">База данных</string>
     <string name="next">Лучше бы деньги</string>
     <string name="congratulations_message">С наступающим, Влад!🎉🥰</string>
@@ -21,12 +21,12 @@
     <string name="action_about">О приложении</string>
     <string name="masunya_description">Стикер масюни</string>
     <string name="no_records_label">Нет данных</string>
-    <string name="oops_message">Записей нет!</string>
+    <string name="oops_message">Записей пока нет</string>
     <string name="no_records_message">
         Добавь запись, чтобы отобразить свою статистику.
         Добавлять запись нужно после упражнения
     </string>
-    <string name="longing_title">Длительность ( в минутах )</string>
+    <string name="time_title">Длительность ( в минутах )</string>
     <string name="rating_title">Оценка</string>
     <string name="add">Добавить</string>
     <string name="cancel">Отмена</string>

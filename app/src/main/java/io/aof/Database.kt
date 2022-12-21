@@ -1,7 +1,6 @@
 package io.aof
 
 import android.os.Bundle
-import android.provider.BaseColumns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +9,9 @@ import androidx.fragment.app.Fragment
 import io.aof.advent_of_fap.R
 import io.aof.advent_of_fap.databinding.DatabaseBinding
 import io.aof.db.Db
+import io.aof.db.Db.Fap.FapEntry.COLUMN_NAME_RATING
+import io.aof.db.Db.Fap.FapEntry.COLUMN_NAME_TIME
+import io.aof.db.Db.Fap.FapEntry.COLUMN_NAME_TIMESTAMP
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -28,10 +30,10 @@ class Database : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = DatabaseBinding.inflate(inflater, container, false)
-        val dbHelper = Db.FapReaderContract.FapReaderDbHelper(requireContext())
+        val dbHelper = Db.Fap.FapReaderDbHelper(requireContext())
         val db = dbHelper.readableDatabase
         val cursor = db.query(
-            Db.FapReaderContract.FapEntry.TABLE_NAME,
+            Db.Fap.FapEntry.TABLE_NAME,
             null,
             null,
             null,
@@ -39,17 +41,19 @@ class Database : Fragment() {
             null,
             null
         )
-        val itemIds = mutableListOf<Long>()
+        val items = mutableListOf<Triple<Long, Long, Long>>()
         with(cursor) {
             while (moveToNext()) {
-                val itemId = getLong(getColumnIndexOrThrow(BaseColumns._ID))
-                itemIds.add(itemId)
+                val timestamp = getLong(getColumnIndexOrThrow(COLUMN_NAME_TIMESTAMP))
+                val rating = getLong(getColumnIndexOrThrow(COLUMN_NAME_RATING))
+                val time = getLong(getColumnIndexOrThrow(COLUMN_NAME_TIME))
+                items.add(Triple(timestamp, rating, time))
             }
         }
         cursor.close()
         db.close()
 
-        binding.root.findViewById<TextView>(R.id.strike).text = itemIds.joinToString(",")
+        binding.root.findViewById<TextView>(R.id.strike).text = items.joinToString(",")
         return binding.root
 
     }

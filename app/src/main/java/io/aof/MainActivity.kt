@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_about -> true
-            R.id.action_settings -> baseContext.deleteDatabase(Db.FapReaderContract.DATABASE_NAME)
+            R.id.action_settings -> baseContext.deleteDatabase(Db.Fap.DATABASE_NAME)
             else -> super.onOptionsItemSelected(item)
         }
     }

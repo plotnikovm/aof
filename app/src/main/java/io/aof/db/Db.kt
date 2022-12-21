@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.provider.BaseColumns
 
 class Db {
-    object FapReaderContract {
+    object Fap {
         const val DATABASE_VERSION = 1
         const val DATABASE_NAME = "FapReader.db"
 
