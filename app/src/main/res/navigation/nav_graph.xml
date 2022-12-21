@@ -7,30 +7,31 @@
 
     <fragment
         android:id="@+id/Tutorial"
-        android:name="com.example.Tutorial"
+        android:name="io.aof.Tutorial"
         android:label="@string/tutorial_label"
         tools:layout="@layout/tutorial">
 
         <action
             android:id="@+id/action_Tutorial_to_Database"
             app:destination="@id/Database" />
+
+        <action
+            android:id="@+id/action_Tutorial_to_No_Records"
+            app:destination="@id/No_Records" />
     </fragment>
     <fragment
         android:id="@+id/Database"
-        android:name="com.example.Database"
+        android:name="io.aof.Database"
         android:label="@string/database_label"
         tools:layout="@layout/database">
 
         <action
             android:id="@+id/action_Database_to_Tutorial"
             app:destination="@id/Tutorial" />
-        <action
-            android:id="@+id/action_Database_to_No_Records"
-            app:destination="@+id/No_Records" />
     </fragment>
     <fragment
         android:id="@+id/No_Records"
-        android:name="com.example.Database"
+        android:name="io.aof.NoRecords"
         android:label="@string/no_records_label"
         tools:layout="@layout/no_records">
 

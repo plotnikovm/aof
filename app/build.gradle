@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.advent_of_fap'
+    namespace 'io.aof.advent_of_fap'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.advent_of_fap"
+        applicationId "io.aof.advent_of_fap"
         minSdk 21
         targetSdk 33
         versionCode 1

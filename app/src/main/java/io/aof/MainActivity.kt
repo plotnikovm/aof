@@ -1,4 +1,4 @@
-package com.example
+package io.aof
 
 import android.os.Bundle
 import android.view.Menu
@@ -10,9 +10,10 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.example.advent_of_fap.R
-import com.example.advent_of_fap.databinding.ActivityMainBinding
-import com.google.android.material.snackbar.Snackbar
+import io.aof.advent_of_fap.R
+import io.aof.advent_of_fap.databinding.ActivityMainBinding
+import io.aof.db.Db
+import io.aof.dialogs.AddDialog
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,10 +36,16 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_SHORT)
+        binding.fab.setOnClickListener {
+            val newFragment = AddDialog()
+            newFragment.show(supportFragmentManager, "add_dialog")
+
+            /*
+            Snackbar.make(view, "Результат записан", Snackbar.LENGTH_SHORT)
                 .setAnchorView(R.id.fab)
-                .setAction("Action", null).show()
+                .setAction("Action", null
+                ).show()
+             */
         }
     }
 
@@ -54,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_about -> true
-            R.id.action_settings -> true
+            R.id.action_settings -> baseContext.deleteDatabase(Db.FapReaderContract.DATABASE_NAME)
             else -> super.onOptionsItemSelected(item)
         }
     }

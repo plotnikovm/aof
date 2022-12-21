@@ -25,21 +25,13 @@
 
             />
 
-        <GridLayout
+        <TextView
             android:id="@+id/strike"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:columnCount="7"
+            android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/strike_message">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/masunya_description"
-                android:src="@drawable/masunya" />
-        </GridLayout>
+            app:layout_constraintTop_toBottomOf="@id/strike_message" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

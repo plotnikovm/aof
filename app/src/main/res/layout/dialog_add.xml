@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:background="#3F51B5"
+        android:contentDescription="@string/app_name"
+        android:scaleType="center"
+        android:src="@drawable/masunya" />
+
+    <TextView
+        android:id="@+id/rating_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:text="@string/rating_title" />
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:hapticFeedbackEnabled="false"
+        android:saveEnabled="false"
+        android:stepSize="1"
+        android:value="0"
+        android:valueFrom="0"
+        android:valueTo="5" />
+
+    <TextView
+        android:id="@+id/longing_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:text="@string/longing_title" />
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/longing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:hapticFeedbackEnabled="false"
+        android:saveEnabled="false"
+        android:stepSize="1"
+        android:value="0"
+        android:valueFrom="0"
+        android:valueTo="60" />
+</LinearLayout>
