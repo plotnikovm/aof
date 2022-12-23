@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -24,12 +25,14 @@
         android:id="@+id/rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/slider_description"
         android:hapticFeedbackEnabled="false"
         android:saveEnabled="false"
         android:stepSize="1"
         android:value="1"
         android:valueFrom="1"
-        android:valueTo="5" />
+        android:valueTo="5"
+        tools:ignore="DuplicateSpeakableTextCheck" />
 
     <TextView
         android:id="@+id/time_title"
@@ -42,6 +45,7 @@
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/slider_description"
         android:hapticFeedbackEnabled="false"
         android:saveEnabled="false"
         android:stepSize="1"
