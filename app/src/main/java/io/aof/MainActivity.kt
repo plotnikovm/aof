@@ -12,8 +12,9 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import io.aof.advent_of_fap.R
 import io.aof.advent_of_fap.databinding.ActivityMainBinding
-import io.aof.db.Db
+import io.aof.dialogs.AboutDialog
 import io.aof.dialogs.AddDialog
+import io.aof.dialogs.ResetDbDialog
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,15 +38,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         binding.fab.setOnClickListener {
-            val newFragment = AddDialog()
-            newFragment.show(supportFragmentManager, "add_dialog")
-
-            /*
-            Snackbar.make(view, "Результат записан", Snackbar.LENGTH_SHORT)
-                .setAnchorView(R.id.fab)
-                .setAction("Action", null
-                ).show()
-             */
+            AddDialog().show(supportFragmentManager, "add_dialog")
         }
     }
 
@@ -60,8 +53,14 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_about -> true
-            R.id.action_settings -> baseContext.deleteDatabase(Db.Fap.DATABASE_NAME)
+            R.id.action_about -> {
+                AboutDialog().show(supportFragmentManager, "about_dialog")
+                true
+            }
+            R.id.action_reset_db -> {
+                ResetDbDialog().show(supportFragmentManager, "reset_db_dialog")
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

@@ -5,6 +5,8 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.ContentValues
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.slider.Slider
 import io.aof.advent_of_fap.R
@@ -18,12 +20,10 @@ class AddDialog : DialogFragment() {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
 
-            // Get the layout inflater
             val inflater = requireActivity().layoutInflater
+            val view: View = inflater.inflate(R.layout.dialog_add, null)
 
-            // Inflate and set the layout for the dialog
-            // Pass null as the parent view because its going in the dialog layout
-            builder.setView(inflater.inflate(R.layout.dialog_add, null))
+            builder.setView(view)
                 .setPositiveButton(R.string.add) { _, _ ->
                     val dbHelper = FapReaderDbHelper(requireContext())
 
@@ -33,18 +33,18 @@ class AddDialog : DialogFragment() {
                     // https://developer.android.com/training/data-storage/sqlite#kotlin
                     val timestamp = System.currentTimeMillis()
 
-                    val rating = view?.findViewById<Slider>(R.id.rating)
-                    val time = view?.findViewById<Slider>(R.id.time)
-
-                    val ratingValue = rating?.value?.roundToInt()
-                    val timeValue = time?.value?.roundToInt()
+                    val rating: Slider = view.findViewById(R.id.rating_slider)
+                    val time: Slider = view.findViewById(R.id.time_slider)
+                    Log.println(Log.INFO, "rating", "${rating.value}")
+                    Log.println(Log.INFO, "time", "${time.value}")
+                    val ratingValue = rating.value.roundToInt()
+                    val timeValue = time.value.roundToInt()
 
                     val values = ContentValues().apply {
                         put(FapEntry.COLUMN_NAME_TIMESTAMP, timestamp)
                         put(FapEntry.COLUMN_NAME_RATING, ratingValue)
                         put(FapEntry.COLUMN_NAME_TIME, timeValue)
                     }
-
 
                     db?.insert(FapEntry.TABLE_NAME, null, values)
                     db.close()

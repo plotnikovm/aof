@@ -1,5 +1,6 @@
 package io.aof
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,8 @@ import io.aof.db.Db
 import io.aof.db.Db.Fap.FapEntry.COLUMN_NAME_RATING
 import io.aof.db.Db.Fap.FapEntry.COLUMN_NAME_TIME
 import io.aof.db.Db.Fap.FapEntry.COLUMN_NAME_TIMESTAMP
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -30,6 +33,19 @@ class Database : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = DatabaseBinding.inflate(inflater, container, false)
+        update(binding.root)
+        return binding.root
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    // TODO: update view on DB updates
+    @SuppressLint("SetTextI18n")
+    private fun update(view: View) {
         val dbHelper = Db.Fap.FapReaderDbHelper(requireContext())
         val db = dbHelper.readableDatabase
         val cursor = db.query(
@@ -53,13 +69,34 @@ class Database : Fragment() {
         cursor.close()
         db.close()
 
-        binding.root.findViewById<TextView>(R.id.strike).text = items.joinToString(",")
-        return binding.root
+        val count = items.count()
 
-    }
+        val entries = items.map {
+            val (timestamp, rating, time) = it
+            val sdf = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
+            val netDate = Date(timestamp)
+            val date = sdf.format(netDate)
+            "$date: $rating/5, $time минут"
+        }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        val ratings = items.map {
+            val (_, rating, _) = it
+            rating
+        }
+
+        val time = items.map {
+            val (_, _, time) = it
+            time
+        }
+
+        val meanRating = ratings.sum().toFloat() / ratings.count()
+        val meanTime = time.sum().toFloat() / time.count()
+
+        view.findViewById<TextView>(R.id.all_records_count).text =
+            "${R.string.all_records} (${count})"
+        view.findViewById<TextView>(R.id.mean_rating).text =
+            "${R.string.mean_rating} (${meanRating})"
+        view.findViewById<TextView>(R.id.mean_time).text = "${R.string.mean_time} (${meanTime})"
+        view.findViewById<TextView>(R.id.all_records).text = entries.joinToString("\n")
     }
 }
