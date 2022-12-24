@@ -12,28 +12,28 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/oops_message"
+            android:id="@+id/oops"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@string/oops_message"
+            android:text="@string/oops"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            app:layout_constraintBottom_toTopOf="@id/no_records_message"
+            app:layout_constraintBottom_toTopOf="@id/no_records"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/no_records_message"
+            android:id="@+id/no_records"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/no_records_message"
+            android:text="@string/no_records"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/no_records_message"
+            app:layout_constraintBottom_toTopOf="@id/no_records"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/no_records_message" />
+            app:layout_constraintTop_toBottomOf="@id/no_records" />
 
         <ImageView
             android:id="@+id/masunya"
@@ -45,6 +45,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/no_records_message" />
+            app:layout_constraintTop_toBottomOf="@id/no_records" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

@@ -1,6 +1,5 @@
 package io.aof
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -43,8 +42,6 @@ class Database : Fragment() {
         _binding = null
     }
 
-    // TODO: update view on DB updates
-    @SuppressLint("SetTextI18n")
     private fun update(view: View) {
         val dbHelper = Db.Fap.FapReaderDbHelper(requireContext())
         val db = dbHelper.readableDatabase
@@ -69,8 +66,6 @@ class Database : Fragment() {
         cursor.close()
         db.close()
 
-        val count = items.count()
-
         val entries = items.map {
             val (timestamp, rating, time) = it
             val sdf = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
@@ -92,11 +87,9 @@ class Database : Fragment() {
         val meanRating = ratings.sum().toFloat() / ratings.count()
         val meanTime = time.sum().toFloat() / time.count()
 
-        view.findViewById<TextView>(R.id.all_records_count).text =
-            "${R.string.all_records} (${count})"
-        view.findViewById<TextView>(R.id.mean_rating).text =
-            "${R.string.mean_rating} (${meanRating})"
-        view.findViewById<TextView>(R.id.mean_time).text = "${R.string.mean_time} (${meanTime})"
+        view.findViewById<TextView>(R.id.mean_rating).text = getString(R.string.mean_rating, meanRating)
+        view.findViewById<TextView>(R.id.mean_time).text = getString(R.string.mean_time, meanTime)
+        view.findViewById<TextView>(R.id.all_records_count).text = getString(R.string.all_records, items.count())
         view.findViewById<TextView>(R.id.all_records).text = entries.joinToString("\n")
     }
 }
