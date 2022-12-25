@@ -12,25 +12,11 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/mean_rating"
+            android:id="@+id/statistics"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@string/mean_rating" />
-
-        <TextView
-            android:id="@+id/mean_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="@string/mean_time" />
-
-        <TextView
-            android:id="@+id/all_records_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="@string/all_records" />
+            android:text="@string/statistics" />
 
         <TextView
             android:id="@+id/all_records"

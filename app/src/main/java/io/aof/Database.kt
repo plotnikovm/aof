@@ -1,5 +1,6 @@
 package io.aof
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,10 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import io.aof.advent_of_fap.R
 import io.aof.advent_of_fap.databinding.DatabaseBinding
-import io.aof.db.Db
-import io.aof.db.Db.Fap.FapEntry.COLUMN_NAME_RATING
-import io.aof.db.Db.Fap.FapEntry.COLUMN_NAME_TIME
-import io.aof.db.Db.Fap.FapEntry.COLUMN_NAME_TIMESTAMP
+import io.aof.db.Export.Companion.getItems
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -42,54 +40,25 @@ class Database : Fragment() {
         _binding = null
     }
 
+    @SuppressLint("StringFormatMatches")
     private fun update(view: View) {
-        val dbHelper = Db.Fap.FapReaderDbHelper(requireContext())
-        val db = dbHelper.readableDatabase
-        val cursor = db.query(
-            Db.Fap.FapEntry.TABLE_NAME,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null
-        )
-        val items = mutableListOf<Triple<Long, Long, Long>>()
-        with(cursor) {
-            while (moveToNext()) {
-                val timestamp = getLong(getColumnIndexOrThrow(COLUMN_NAME_TIMESTAMP))
-                val rating = getLong(getColumnIndexOrThrow(COLUMN_NAME_RATING))
-                val time = getLong(getColumnIndexOrThrow(COLUMN_NAME_TIME))
-                items.add(Triple(timestamp, rating, time))
-            }
-        }
-        cursor.close()
-        db.close()
-
+        val items = getItems(requireContext())
+        var rating: Long = 0
+        var time: Long = 0
         val entries = items.map {
-            val (timestamp, rating, time) = it
             val sdf = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
-            val netDate = Date(timestamp)
+            val netDate = Date(it.timestamp)
             val date = sdf.format(netDate)
-            "$date: $rating/5, $time минут"
+            rating += it.rating
+            time += it.time
+            getString(R.string.entry_format, date, it.rating, it.time)
         }
 
-        val ratings = items.map {
-            val (_, rating, _) = it
-            rating
-        }
-
-        val time = items.map {
-            val (_, _, time) = it
-            time
-        }
-
-        val meanRating = ratings.sum().toFloat() / ratings.count()
-        val meanTime = time.sum().toFloat() / time.count()
-
-        view.findViewById<TextView>(R.id.mean_rating).text = getString(R.string.mean_rating, meanRating)
-        view.findViewById<TextView>(R.id.mean_time).text = getString(R.string.mean_time, meanTime)
-        view.findViewById<TextView>(R.id.all_records_count).text = getString(R.string.all_records, items.count())
+        val count = items.count()
+        val meanRating = rating.toFloat() / count
+        val meanTime = time.toFloat() / count
+        val result = getString(R.string.statistics, count, meanRating, meanTime)
+        view.findViewById<TextView>(R.id.statistics).text = result
         view.findViewById<TextView>(R.id.all_records).text = entries.joinToString("\n")
     }
 }

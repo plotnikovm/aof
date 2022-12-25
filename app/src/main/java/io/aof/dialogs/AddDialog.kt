@@ -1,11 +1,9 @@
 package io.aof.dialogs
 
-import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.ContentValues
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.slider.Slider
@@ -15,7 +13,6 @@ import io.aof.db.Db.Fap.FapReaderDbHelper
 import kotlin.math.roundToInt
 
 class AddDialog : DialogFragment() {
-    @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
@@ -29,14 +26,11 @@ class AddDialog : DialogFragment() {
 
                     val db = dbHelper.writableDatabase
 
-                    // https://developer.android.com/develop/ui/views/components/dialogs
-                    // https://developer.android.com/training/data-storage/sqlite#kotlin
                     val timestamp = System.currentTimeMillis()
 
                     val rating: Slider = view.findViewById(R.id.rating_slider)
                     val time: Slider = view.findViewById(R.id.time_slider)
-                    Log.println(Log.INFO, "rating", "${rating.value}")
-                    Log.println(Log.INFO, "time", "${time.value}")
+
                     val ratingValue = rating.value.roundToInt()
                     val timeValue = time.value.roundToInt()
 

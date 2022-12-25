@@ -1,15 +1,13 @@
 package io.aof
 
 import android.os.Bundle
-import android.provider.BaseColumns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import io.aof.advent_of_fap.databinding.TutorialBinding
-import io.aof.db.Db.Fap.FapEntry
-import io.aof.db.Db.Fap.FapReaderDbHelper
+import io.aof.db.Export.Companion.getItems
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -35,32 +33,13 @@ class Tutorial : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.buttonFirst.setOnClickListener {
-            val dbHelper = FapReaderDbHelper(requireContext())
-            val db = dbHelper.readableDatabase
-            val cursor = db.query(
-                FapEntry.TABLE_NAME,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-            )
-            val itemIds = mutableListOf<Long>()
-            with(cursor) {
-                while (moveToNext()) {
-                    val itemId = getLong(getColumnIndexOrThrow(BaseColumns._ID))
-                    itemIds.add(itemId)
-                }
-            }
-            cursor.close()
+            val items = getItems(requireContext())
 
-            if (itemIds.isNotEmpty()) {
+            if (items.isNotEmpty()) {
                 findNavController().navigate(io.aof.advent_of_fap.R.id.action_Tutorial_to_Database)
             } else {
                 findNavController().navigate(io.aof.advent_of_fap.R.id.action_Tutorial_to_No_Records)
             }
-            db.close()
         }
     }
 

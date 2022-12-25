@@ -8,14 +8,13 @@ import android.provider.BaseColumns
 class Db {
     object Fap {
         const val DATABASE_VERSION = 1
-        const val DATABASE_NAME = "FapReader.db"
+        const val DATABASE_NAME = "Fap.db"
 
-        // Table contents are grouped together in an anonymous object.
         object FapEntry : BaseColumns {
             const val TABLE_NAME = "entry"
             const val COLUMN_NAME_TIMESTAMP = "timestamp"
-            const val COLUMN_NAME_RATING = "rating" // in stars
-            const val COLUMN_NAME_TIME = "time" // fap time in seconds
+            const val COLUMN_NAME_RATING = "rating" // in "stars" ( 1 - 5 )
+            const val COLUMN_NAME_TIME = "time" // fap time in minutes ( 1 - 60 )
         }
 
         private const val SQL_CREATE_ENTRIES =

@@ -12,9 +12,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import io.aof.advent_of_fap.R
 import io.aof.advent_of_fap.databinding.ActivityMainBinding
-import io.aof.dialogs.AboutDialog
-import io.aof.dialogs.AddDialog
-import io.aof.dialogs.ResetDbDialog
+import io.aof.dialogs.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -55,6 +53,14 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.action_about -> {
                 AboutDialog().show(supportFragmentManager, "about_dialog")
+                true
+            }
+            R.id.action_export -> {
+                ExportDialog().show(supportFragmentManager, "export_dialog")
+                true
+            }
+            R.id.action_import -> {
+                ImportDialog().show(supportFragmentManager, "import_dialog")
                 true
             }
             R.id.action_reset_db -> {
