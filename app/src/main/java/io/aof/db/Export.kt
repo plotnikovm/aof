@@ -14,7 +14,6 @@ import kotlin.text.Charsets.UTF_8
 class Export {
     companion object {
         fun getItems(context: Context): List<Fap> {
-
             val dbHelper = Db.Fap.FapReaderDbHelper(context)
             val db = dbHelper.readableDatabase
             val cursor = db.query(
@@ -56,7 +55,7 @@ class Export {
 
             val renderOption = RenderOption()
             renderOption.content = bos.toString() // content to encode
-            renderOption.size = 350 // size of the final QR code image
+            renderOption.size = 450 // size of the final QR code image
             renderOption.borderWidth = 6 // width of the empty space around the QR code
             renderOption.patternScale = 1f // (optional) specify a scale for patterns
             renderOption.clearBorder =

@@ -2,29 +2,62 @@ package io.aof.dialogs
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.ContentValues
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import io.aof.advent_of_fap.R
-import io.aof.db.Export.Companion.exportQr
-import io.aof.db.Export.Companion.getItems
+import io.aof.db.Db
+import io.aof.db.Import.Companion.importQrJson
+import io.github.g00fy2.quickie.QRResult
+import io.github.g00fy2.quickie.ScanQRCode
 
 class ImportDialog : DialogFragment() {
-    // TODO: implement import
+    // todo: fix
+    private val scanQrCodeLauncher = registerForActivityResult(ScanQRCode()) { result ->
+
+        when (result) {
+            is QRResult.QRSuccess -> {
+                val value = result.content.rawValue
+                val items = importQrJson(value)
+
+                requireContext().deleteDatabase(Db.Fap.DATABASE_NAME)
+
+                val dbHelper = Db.Fap.FapReaderDbHelper(requireContext())
+                val db = dbHelper.writableDatabase
+
+                if (items != null) {
+                    for (item in items.iterator()) {
+                        val values = ContentValues().apply {
+                            put(Db.Fap.FapEntry.COLUMN_NAME_TIMESTAMP, item.timestamp)
+                            put(Db.Fap.FapEntry.COLUMN_NAME_RATING, item.rating)
+                            put(Db.Fap.FapEntry.COLUMN_NAME_TIME, item.time)
+                        }
+
+                        db?.insert(Db.Fap.FapEntry.TABLE_NAME, null, values)
+                    }
+                }
+
+                db.close()
+                dbHelper.close()
+            }
+            else -> {}
+        }
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
 
             val inflater = requireActivity().layoutInflater
             val view: View = inflater.inflate(R.layout.dialog_import, null)
-            val items = getItems(requireContext())
-            val bmp = exportQr(items)
-            view.findViewById<ImageView>(R.id.qr_code).setImageBitmap(bmp)
-            view.findViewById<TextView>(R.id.export_state).text =
-                getString(R.string.export_state_generated)
             builder.setView(view)
+                .setPositiveButton(R.string.reset) { _, _ ->
+                    Log.println(Log.INFO, "qr result", "wow")
+
+                    scanQrCodeLauncher.launch(null)
+                }
                 .setNegativeButton(R.string.exit) { dialog, _ ->
                     dialog.cancel()
                 }

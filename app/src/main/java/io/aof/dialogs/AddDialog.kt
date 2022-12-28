@@ -42,6 +42,7 @@ class AddDialog : DialogFragment() {
 
                     db?.insert(FapEntry.TABLE_NAME, null, values)
                     db.close()
+                    dbHelper.close()
                 }
                 .setNegativeButton(R.string.cancel) { dialog, _ ->
                     dialog.cancel()

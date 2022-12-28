@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import io.aof.advent_of_fap.R
 import io.aof.advent_of_fap.databinding.TutorialBinding
 import io.aof.db.Export.Companion.getItems
+import java.util.*
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -24,7 +27,6 @@ class Tutorial : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = TutorialBinding.inflate(inflater, container, false)
         return binding.root
 
@@ -32,13 +34,19 @@ class Tutorial : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val congratulations = view.findViewById<TextView>(R.id.congratulations)
+        val date = Date(System.currentTimeMillis())
+        @Suppress("DEPRECATION")
+        if (date.month != 11) {
+            congratulations.text = getString(R.string.congratulations_not_december)
+        }
         binding.buttonFirst.setOnClickListener {
             val items = getItems(requireContext())
 
             if (items.isNotEmpty()) {
-                findNavController().navigate(io.aof.advent_of_fap.R.id.action_Tutorial_to_Database)
+                findNavController().navigate(R.id.action_Tutorial_to_Database)
             } else {
-                findNavController().navigate(io.aof.advent_of_fap.R.id.action_Tutorial_to_No_Records)
+                findNavController().navigate(R.id.action_Tutorial_to_No_Records)
             }
         }
     }

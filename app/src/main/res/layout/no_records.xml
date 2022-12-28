@@ -36,12 +36,12 @@
             app:layout_constraintTop_toBottomOf="@id/no_records" />
 
         <ImageView
-            android:id="@+id/masunya"
+            android:id="@+id/masunya_support"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:contentDescription="@string/masunya_description"
-            android:src="@drawable/masunya"
+            android:src="@drawable/masunya_support"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

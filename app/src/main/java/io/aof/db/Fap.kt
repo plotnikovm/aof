@@ -6,3 +6,7 @@ class Fap(
     val rating: Long,
     val time: Long
 )
+
+class ListFap(
+    val list: List<Fap>?
+)
