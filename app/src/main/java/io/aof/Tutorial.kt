@@ -12,9 +12,6 @@ import io.aof.advent_of_fap.databinding.TutorialBinding
 import io.aof.db.Export.Companion.getItems
 import java.util.*
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class Tutorial : Fragment() {
 
     private var _binding: TutorialBinding? = null
@@ -36,10 +33,14 @@ class Tutorial : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val congratulations = view.findViewById<TextView>(R.id.congratulations)
         val date = Date(System.currentTimeMillis())
+
         @Suppress("DEPRECATION")
-        if (date.month != 11) {
-            congratulations.text = getString(R.string.congratulations_not_december)
+        when (date.month) {
+            11 -> congratulations.text = getString(R.string.congratulations_december)
+            10 -> congratulations.text = getString(R.string.congratulations_november)
+            else -> congratulations.text = getString(R.string.congratulations)
         }
+
         binding.buttonFirst.setOnClickListener {
             val items = getItems(requireContext())
 

@@ -7,9 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import io.aof.advent_of_fap.databinding.NoRecordsBinding
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
 class NoRecords : Fragment() {
 
     private var _binding: NoRecordsBinding? = null

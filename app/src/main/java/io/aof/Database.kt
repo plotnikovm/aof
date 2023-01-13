@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package io.aof
 
 import android.annotation.SuppressLint
@@ -13,15 +15,11 @@ import io.aof.db.Export.Companion.getItems
 import java.text.SimpleDateFormat
 import java.util.*
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
+
 class Database : Fragment() {
 
     private var _binding: DatabaseBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
 
@@ -43,10 +41,11 @@ class Database : Fragment() {
     @SuppressLint("StringFormatMatches")
     private fun update(view: View) {
         val items = getItems(requireContext())
+
         var rating: Long = 0
         var time: Long = 0
         val entries = items.map {
-            val sdf = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
+            val sdf = SimpleDateFormat("dd.MM.yy ( HH:mm:ss )", Locale.getDefault())
             val netDate = Date(it.timestamp)
             val date = sdf.format(netDate)
             rating += it.rating

@@ -51,5 +51,5 @@
         android:stepSize="1"
         android:value="1"
         android:valueFrom="1"
-        android:valueTo="60" />
+        android:valueTo="90" />
 </LinearLayout>
